@@ -12,7 +12,7 @@ node_modules/*
 dist
 dist-ssr
 *.local
-packagr-lock.json
+package-lock.json
 
 # Editor directories and files
 .vscode/*
