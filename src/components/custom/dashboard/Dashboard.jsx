@@ -4,7 +4,7 @@ import { getBooks } from '@/api/booksApi'
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, Search, Trash2 } from 'lucide-react';
 
 const Dashboard = () => {
   const [rowData, setRowData] = useState([
@@ -51,6 +51,7 @@ const Dashboard = () => {
       </div>
     ) }
   ]);
+  const [searchTerm,setSearchTerm] = useState('')
   const { data: books, isPending, error } = useQuery({
     queryKey: ['books'],
     queryFn: getBooks
@@ -59,6 +60,10 @@ const Dashboard = () => {
   return (
     <>
       <h2 className='text-center text-lg p-3 font-semibold tracking-wider  uppercase'>Dashboard</h2>
+      <div className='border flex my-2 p-2 max-w-sm rounded-lg'>
+        <Search color='grey'/>
+        <input type='text' placeholder='Search any fields' className='outline-none pl-2' onChange={(event)=>setSearchTerm(event.target.value)}/>
+      </div>
       <div
         className="ag-theme-quartz" // applying the Data Grid theme
         style={{ height: 500 }} // the Data Grid will fill the size of the parent container
@@ -68,6 +73,7 @@ const Dashboard = () => {
           columnDefs={colDefs}
           pagination={true}
           paginationPageSize={10}
+          quickFilterText={searchTerm}
         />
       </div>
     </>
