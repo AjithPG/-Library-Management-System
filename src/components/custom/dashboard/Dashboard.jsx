@@ -60,6 +60,7 @@ const Dashboard = () => {
   return (
     <>
       <h2 className='text-center text-lg p-3 font-semibold tracking-wider  uppercase'>Dashboard</h2>
+      {error && <p className='text-xl text-red-500 tracking-wide text-center'>{error.message}</p>}
       <div className='border flex my-2 p-2 max-w-sm rounded-lg'>
         <Search color='grey'/>
         <input type='text' placeholder='Search any fields' className='outline-none pl-2' onChange={(event)=>setSearchTerm(event.target.value)}/>
