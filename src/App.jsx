@@ -11,6 +11,7 @@ import ReturnBook from './components/custom/return-book/ReturnBook';
 import Analytics from './components/custom/analytics/Analytics';
 import Chart from './components/custom/chart/Chart';
 import Header from './components/custom/header/Header';
+import EditBook from './components/custom/edit-book/EditBook';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
       <Route element={<ProtectedRoute/>}>
        <Route path='/dashboard' element={<Dashboard/>}/>
        <Route path='/addbook' element={<AddBook/>}/>
+       <Route path='/books/:id' element={<EditBook/>}/>
        <Route path='/studentlist' element={<StudentList/>}/>
        <Route path='/addstudent' element={<AddStudent/>}/>
        <Route path='/issuebook' element={<IssueBook/>}/>

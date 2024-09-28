@@ -5,42 +5,21 @@ import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
 import { Pencil, Search, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  const [rowData, setRowData] = useState([
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-  ]);
-
+  const [searchTerm,setSearchTerm] = useState('')
+  const navigate = useNavigate();
   // Column Definitions: Defines the columns to be displayed.
   const [colDefs, setColDefs] = useState([
     { field: "name" },
     { field: "author" },
     { field: "publisher" },
-    { field: "ISBN" },
+    { field: "isbn" },
     { field: "assignedto", cellRenderer: () => <span className='cursor-pointer underline'>Student</span> },
     {
-      field: "Edit", maxWidth: 100, cellRenderer: () => (
-        <div className='py-2'>
+      field: "Edit", maxWidth: 100, cellRenderer: (params) => (
+        <div className='py-2' onClick={()=>navigate(`/books/${params.data.id}`)}>
           <Pencil color="grey" size={20} className='cursor-pointer' />
         </div>
       )
@@ -51,12 +30,12 @@ const Dashboard = () => {
       </div>
     ) }
   ]);
-  const [searchTerm,setSearchTerm] = useState('')
+
   const { data: books, isPending, error } = useQuery({
     queryKey: ['books'],
     queryFn: getBooks
   })
-  console.log({ books })
+  console.log('Dashboard',books)
   return (
     <>
       <h2 className='text-center text-lg p-3 font-semibold tracking-wider  uppercase'>Dashboard</h2>

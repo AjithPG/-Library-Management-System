@@ -1,8 +1,8 @@
 import React from 'react'
-import EditBook from '../edit-book/EditBook'
 import { useMutation } from '@tanstack/react-query'
 import { addBooks } from '@/api/booksApi'
 import { toast } from 'sonner'
+import BookForm from '../book-form/BookForm'
 
 
 const AddBook = () => {
@@ -31,7 +31,7 @@ const AddBook = () => {
   return (
     <>
       <h2 className='text-center text-lg p-3 font-semibold tracking-wider  uppercase'>Add Book</h2>
-       <EditBook handleFormSubmit={handleFormSubmit} isPending={isPending} />
+       <BookForm handleFormSubmit={handleFormSubmit} isPending={isPending} />
     </>
 
   )
