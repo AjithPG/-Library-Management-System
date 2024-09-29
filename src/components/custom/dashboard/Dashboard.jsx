@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getBooks } from '@/api/booksApi'
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [searchTerm,setSearchTerm] = useState('')
   const navigate = useNavigate();
   // Column Definitions: Defines the columns to be displayed.
-  const [colDefs, setColDefs] = useState([
+  const colDefs = useRef([
     { field: "name" },
     { field: "author" },
     { field: "publisher" },
@@ -29,8 +29,8 @@ const Dashboard = () => {
         <Trash2 color="red" size={20} className='cursor-pointer' />
       </div>
     ) }
-  ]);
-
+  ])
+ 
   const { data: books, isPending, error } = useQuery({
     queryKey: ['books'],
     queryFn: getBooks
@@ -50,7 +50,7 @@ const Dashboard = () => {
       >
         <AgGridReact
           rowData={books}
-          columnDefs={colDefs}
+          columnDefs={colDefs.current}
           pagination={true}
           paginationPageSize={10}
           quickFilterText={searchTerm}

@@ -1,6 +1,6 @@
 import supabase from "@/utils/supabase";
 export const getBooks = async () => {
-    const { data: books, error } = await supabase.from('books').select('*')
+    const { data: books, error } = await supabase.from('books').select('*').order('update_at',{ascending:false})
 
     if (error) {
         console.log(error)

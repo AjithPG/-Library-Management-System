@@ -25,7 +25,9 @@ const EditBook = () => {
     mutationFn:editBooks,
     onSuccess:()=>{
       toast("Book is Updated Successfully")
-      navigate('/dashboard')
+      setTimeout(()=>{
+        navigate('/dashboard')
+      },1000) 
     },
     onError:(error)=>toast(error.message)
 
